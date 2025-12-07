@@ -91,6 +91,18 @@ test.describe('PWA 기능', () => {
     await expect(manifestLink).toHaveAttribute('href', /manifest/);
   });
 
+  test('PWA 아이콘 파일 로드 가능', async ({ page }) => {
+    // 192x192 아이콘 확인
+    const response192 = await page.request.get('/icons/icon-192.png');
+    expect(response192.ok()).toBe(true);
+    expect(response192.headers()['content-type']).toContain('image/png');
+
+    // 512x512 아이콘 확인
+    const response512 = await page.request.get('/icons/icon-512.png');
+    expect(response512.ok()).toBe(true);
+    expect(response512.headers()['content-type']).toContain('image/png');
+  });
+
   test('viewport meta 태그 확인', async ({ page }) => {
     await page.goto('/');
 

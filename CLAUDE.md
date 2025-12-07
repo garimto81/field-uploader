@@ -21,11 +21,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm install              # Install dependencies
-npm run dev              # Dev server → http://localhost:5173
-npm run build            # Production build → dist/
-npm run preview          # Preview production build
-npm test                 # Playwright E2E tests
+npm install                 # Install dependencies
+npm run dev                 # Dev server → http://localhost:5173
+npm run build               # Build → dist/
+npm run preview             # Preview production build
+
+# Tests (port 5174)
+npm test                    # Playwright E2E (Chromium + Mobile Chrome + Mobile Safari)
+npm test -- --headed        # E2E with browser UI
+npm test -- --ui            # Playwright UI mode
+npm test -- --project=chromium  # 특정 프로젝트만 실행
 ```
 
 ---
@@ -66,15 +71,6 @@ tests/
 
 ---
 
-## Related Repositories
-
-| 레포 | 용도 |
-|------|------|
-| [contents-factory](https://github.com/garimto81/contents-factory) | 메인 PWA + PocketBase 서버 |
-| [shorts-generator](https://github.com/garimto81/shorts-generator) | PC 쇼츠 영상 생성 CLI |
-
----
-
 ## Environment
 
 PocketBase 서버 연결 설정:
@@ -83,3 +79,25 @@ PocketBase 서버 연결 설정:
 // src/sync.js
 const POCKETBASE_URL = 'http://localhost:8090';
 ```
+
+`src/sync.js:8`에서 `import.meta.env.VITE_POCKETBASE_URL`로 참조 (fallback: localhost:8090)
+
+### PocketBase API
+
+- **Upload endpoint**: `POST /api/collections/photos/records`
+- **FormData fields**: `title` (string), `image` (file), `thumbnail` (file, optional)
+
+---
+
+## Related Projects
+
+- [contents-factory](https://github.com/garimto81/contents-factory) - 메인 PWA + PocketBase 서버
+- [shorts-generator](https://github.com/garimto81/shorts-generator) - PC 영상 생성 CLI
+
+---
+
+## Do Not
+
+- ❌ PocketBase URL 하드코딩 유지
+- ❌ Service Worker 캐시 무효화 없이 배포
+- ❌ IndexedDB 스키마 버전 무단 변경
