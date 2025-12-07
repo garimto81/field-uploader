@@ -15,8 +15,38 @@ const uploadBtn = document.getElementById('upload-btn');
 const preview = document.getElementById('preview');
 const statusDisplay = document.getElementById('status');
 const recentList = document.getElementById('recent-list');
+const installBtn = document.getElementById('install-btn');
 
 let currentPhoto = null;
+let deferredPrompt = null;
+
+// PWA Install Prompt
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.hidden = false;
+  console.log('📲 PWA install available');
+});
+
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+
+  installBtn.disabled = true;
+  deferredPrompt.prompt();
+
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log(`📲 Install prompt outcome: ${outcome}`);
+
+  deferredPrompt = null;
+  installBtn.hidden = true;
+  installBtn.disabled = false;
+});
+
+window.addEventListener('appinstalled', () => {
+  console.log('✅ PWA installed');
+  deferredPrompt = null;
+  installBtn.hidden = true;
+});
 
 // Capture button handler
 captureBtn.addEventListener('click', async () => {

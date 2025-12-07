@@ -119,4 +119,27 @@ test.describe('PWA 기능', () => {
     await expect(themeColor).toHaveAttribute('content', '#1a1a2e');
   });
 
+  test('설치 버튼 존재 (초기 hidden)', async ({ page }) => {
+    await page.goto('/');
+
+    // 설치 버튼이 DOM에 존재하지만 hidden 상태
+    const installBtn = page.locator('#install-btn');
+    await expect(installBtn).toBeHidden();
+    await expect(installBtn).toHaveAttribute('aria-label', '앱 설치');
+  });
+
+  test('설치 버튼 구조 확인', async ({ page }) => {
+    await page.goto('/');
+
+    // beforeinstallprompt 시뮬레이션으로 버튼 표시
+    await page.evaluate(() => {
+      const btn = document.getElementById('install-btn');
+      if (btn) btn.hidden = false;
+    });
+
+    const installBtn = page.locator('#install-btn');
+    await expect(installBtn).toBeVisible();
+    await expect(installBtn).toContainText('앱 설치');
+  });
+
 });

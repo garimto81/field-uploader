@@ -12,7 +12,7 @@
 |-------|------|--------|
 | Phase 0: 요구사항 | ✅ 완료 | 100% |
 | Phase 1: MVP | ✅ 완료 | 100% |
-| Phase 2: PWA + 인증 | 🔄 진행 중 | 73% |
+| Phase 2: PWA + 인증 | 🔄 진행 중 | 82% |
 | Phase 3: 안정화 | ⏳ 대기 | 33% |
 | Phase 4: 배포 | ⏳ 대기 | 0% |
 
@@ -85,9 +85,10 @@
   - E2E 테스트 추가 완료
 
 ### Task 2.3: PWA 설치 프롬프트
-- [ ] beforeinstallprompt 이벤트 처리
-- [ ] "홈 화면에 추가" 안내 UI
-- [ ] 설치 완료 감지
+- [x] beforeinstallprompt 이벤트 처리 (`src/main.js`)
+- [x] "홈 화면에 추가" 안내 UI (`#install-btn`)
+- [x] 설치 완료 감지 (appinstalled 이벤트)
+- [x] E2E 테스트 추가 (설치 버튼 hidden/visible)
 
 ### Task 2.4: SSO/OAuth 인증
 - [ ] PocketBase OAuth 설정
@@ -159,7 +160,7 @@
 | Task | 상태 | 설명 |
 |------|------|------|
 | 2.1 오프라인 폴백 | ⏳ | 오프라인 시 보여줄 페이지 |
-| 2.3 설치 프롬프트 | ⏳ | 사용자 설치 유도 |
+| ~~2.3 설치 프롬프트~~ | ✅ | 완료 (2025-12-08) |
 | 3.1 E2E 테스트 보강 | ⏳ | 업로드 플로우 테스트 |
 
 ### 향후 (P2)
@@ -173,16 +174,15 @@
 
 ## Next Steps
 
-1. **설치 프롬프트 구현** (Task 2.3) - P1
-   - beforeinstallprompt 이벤트 처리
-   - 설치 버튼 UI 추가
-
-2. **오프라인 폴백 페이지** (Task 2.1) - P1
+1. **오프라인 폴백 페이지** (Task 2.1) - P1
    - Service Worker 오프라인 처리
 
-3. **E2E 테스트 보강** (Task 3.1) - P1
+2. **E2E 테스트 보강** (Task 3.1) - P1
    - 이미지 업로드 모킹
    - 전체 플로우 테스트
+
+3. **SSO/OAuth 인증** (Task 2.4) - P2
+   - PocketBase OAuth 연동
 
 ---
 

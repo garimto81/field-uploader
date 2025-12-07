@@ -22,11 +22,49 @@ body {
   margin: 0 auto;
 }
 
+/* Header with install button */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 h1 {
   text-align: center;
-  margin-bottom: 20px;
   font-size: 1.5rem;
   font-weight: 600;
+  flex: 1;
+}
+
+/* Install button */
+#install-btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.1s ease, opacity 0.2s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+#install-btn:active {
+  transform: scale(0.95);
+}
+
+#install-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#install-btn[hidden] {
+  display: none;
 }
 
 /* Capture button - large circular camera button */
